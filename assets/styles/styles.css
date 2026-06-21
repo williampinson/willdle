@@ -1,0 +1,70 @@
+:root {
+  --background: #131313;
+  --text-color: #f4f4f4;
+  --border-color: #3b3b3b;
+  --correct: #538d4e;
+  --misplaced: #b59f3b;
+  --incorrect: #3a3a3c;
+  --correct-border: #395936;
+  --misplaced-color: #7d6e2a;
+  --incorrect-border: #2a2a2b;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  color: var(--text-color);
+  background-color: var(--background);
+}
+
+header {
+  text-align: center;
+  border-bottom: 2px solid var(--border-color);
+  padding-bottom: 0.5em;
+}
+
+#button-settings {
+  text-align: right;
+  background-color: var(--background);
+  color: var(--text-color);
+}
+
+#game {
+  height: 65vh;
+  justify-content: center;
+}
+
+#game-grid {
+  display: grid;
+  gap: 8px;
+  /* grid-template-columns: repeat(5, 60px); */
+  justify-content: center;
+  margin-top: 2em;
+}
+
+.letter {
+  width: 60px;
+  height: 60px;
+  font-size: 2.4rem;
+  text-transform: uppercase;
+  border: 2px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.correct {
+  background: var(--correct);
+  border: 2px solid var(--correct-border);
+}
+
+.misplaced {
+  background: var(--misplaced);
+  border: 2px solid var(--misplaced-border);
+}
+
+.incorrect {
+  background: var(--incorrect);
+  border: 2px solid var(--incorrect-border);
+}
