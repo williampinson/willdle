@@ -36,21 +36,22 @@ button {
 }
 
 #game {
-  height: 65vh;
+  height: 70vh;
   justify-content: center;
 }
 
 #game-grid {
   display: grid;
-  gap: 6px;
+  gap: 8px;
   justify-content: center;
   margin-top: 1.5em;
 }
 
 .letter {
-  width: 58px;
-  height: 58px;
+  width: 60px;
+  height: 60px;
   font-size: 2.4rem;
+  font-weight: bold;
   text-transform: uppercase;
   border: 2px solid var(--border-color);
   display: flex;
@@ -82,6 +83,7 @@ button {
 }
 
 #keyboard {
+  margin: auto;
   padding: 1.5em 0;
   display: flex;
   align-items: center;
