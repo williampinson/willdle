@@ -8,6 +8,7 @@
   --correct-border: #395936;
   --misplaced-border: #7d6e2a;
   --incorrect-border: #2a2a2b;
+  --keyboard-key-color: #7b7b7b;
 }
 
 body {
@@ -74,4 +75,41 @@ header {
 
 .hidden {
   display: none;
+}
+
+#keyboard {
+  padding: 2em 0;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.key {
+  display: flex;
+  background-color: var(--keyboard-key-color);
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  border-radius: 5px;
+  border: none;
+  font-weight: bold;
+  font-size: 16pt;
+  min-width: 2.75rem;
+  min-height: 3.5rem;
+  color: var(--text-color);
+}
+
+.big-key {
+  width: 4.35rem;
+  font-weight: normal;
+}
+
+#key-enter {
+  font-size: 12pt;
+}
+
+.keyboard-row {
+  display: flex;
+  gap: 6px;
 }

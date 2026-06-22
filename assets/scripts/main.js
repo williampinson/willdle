@@ -21,7 +21,45 @@ function setUpGrid() {
   }
 }
 
-setUpGrid();
+const keyboard = document.getElementById("keyboard");
+const keyboardKeys = [
+  ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p"],
+  ["a", "s", "d", "f", "g", "h", "j", "k", "l"],
+  ["enter", "z", "x", "c", "v", "b", "n", "m", "backspace"],
+];
+
+function setUpKeyboard() {
+  keyboard.innerHTML = "";
+  for (let row = 0; row < 3; row++) {
+    const keyboardRow = document.createElement("div");
+    keyboardRow.className = "keyboard-row";
+    keyboardRow.id = `keyboard-row-${row}`;
+    keyboard.appendChild(keyboardRow);
+    for (let key of keyboardKeys[row]) {
+      const tile = document.createElement("button");
+      tile.classList.add("key", `keyboardRow-${row}`);
+      tile.id = `key-${key}`;
+      if (key === "backspace") {
+        tile.textContent = "⌫";
+      } else {
+        tile.textContent = key.toUpperCase();
+      }
+      tile.addEventListener("click", () => {
+        if (key === "backspace") {
+          removeLetter();
+        } else if (key === "enter") {
+          submitGuess();
+        } else {
+          addLetter(key);
+        }
+      });
+      if (key === "enter" || key === "backspace") {
+        tile.classList.add("big-key");
+      }
+      keyboardRow.appendChild(tile);
+    }
+  }
+}
 
 function isLetter(input) {
   return input.length === 1 && /[a-z]/i.test(input);
@@ -125,3 +163,8 @@ function revealAttemptResults(results) {
 function lockInput() {
   document.removeEventListener("keydown", handleKeyDown);
 }
+
+(function init() {
+  setUpGrid();
+  setUpKeyboard();
+})();

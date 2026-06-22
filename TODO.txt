@@ -1,6 +1,5 @@
-- keyboard with checked letters
-    - mobile compatibility
 - improve misplaced checked
+- update keyboard with colors
 - settings
 - microtransactions!!!!!! definitely
 - win and lose events
