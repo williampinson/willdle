@@ -157,7 +157,7 @@ async function submitGuess() {
 
   const results = await checkGuess(userGuess);
   if (!results) {
-    resultsParagraph.textContent = "not a word";
+    resultsParagraph.textContent += "not a word dsfsdf";
     return;
   }
 
