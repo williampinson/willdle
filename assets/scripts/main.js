@@ -2,6 +2,7 @@ import { config, gameState, checkGuess } from "./game.js";
 console.log(gameState.targetWord);
 
 const grid = document.getElementById("game-grid");
+const resultsParagraph = document.getElementById("results-message");
 const winMessages = [
   "yay! you win!",
   "you win!",
@@ -92,8 +93,27 @@ const handleKeyDown = (e) => {
 
 document.addEventListener("keydown", handleKeyDown);
 
+let settingsClickCount = 0;
+
 document.getElementById("button-settings").addEventListener("click", () => {
-  alert("sorry, no settings yet");
+  settingsClickCount++;
+  if (settingsClickCount <= 5) {
+    resultsParagraph.textContent = "sorry, no settings yet";
+  } else if (settingsClickCount <= 10) {
+    resultsParagraph.textContent = "I said no settings yet";
+  } else if (settingsClickCount <= 20) {
+    resultsParagraph.textContent = "did you hear me? NO SETTINGS";
+  } else {
+    resultsParagraph.textContent = "STOP PRESSING THAT BUTTON";
+    setTimeout(() => {
+      resultsParagraph.textContent = "I'm calm. I'm calm.";
+      settingsClickCount = 0;
+    }, 10000);
+    setTimeout(() => {
+      resultsParagraph.textContent = "";
+      settingsClickCount = 0;
+    }, 15000);
+  }
 });
 
 function addLetter(letter) {
@@ -123,7 +143,7 @@ const tileRevealDelay = 300;
 
 async function submitGuess() {
   if (gameState.currentPosition < config.wordLength) {
-    alert("incomplete word");
+    resultsParagraph.textContent = "incomplete word.";
     return;
   }
   const rowTiles = document.querySelectorAll(
@@ -137,17 +157,18 @@ async function submitGuess() {
 
   const results = await checkGuess(userGuess);
   if (!results) {
-    alert("not a word");
+    resultsParagraph.textContent = "not a word";
     return;
   }
 
   revealAttemptResults(results);
+  resultsParagraph.textContent = "";
 
   const isWon = results.every((result) => result === "correct");
   if (isWon) {
     lockInput();
     setTimeout(() => {
-      alert(getWinMessage());
+      resultsParagraph.textContent = getWinMessage();
     }, config.wordLength * tileRevealDelay);
     return;
   }
@@ -156,7 +177,7 @@ async function submitGuess() {
   if (isLoss) {
     lockInput();
     setTimeout(() => {
-      alert(`you lose! LOSER. The word was ${gameState.targetWord}`);
+      resultsParagraph.textContent = `you lose! LOSER. The word was ${gameState.targetWord}`;
     }, config.wordLength * tileRevealDelay);
     return;
   }

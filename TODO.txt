@@ -1,6 +1,5 @@
 - improve misplaced checked
-- update keyboard with colors
 - settings
 - microtransactions!!!!!! definitely
-- win and lose events
+- win and lose events/banners and things
 - animations
