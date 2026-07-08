@@ -6,9 +6,7 @@ export const config = {
 export const gameState = {
   currentAttempt: 0,
   currentPosition: 0,
-  // targetWord: await getRandomWord(),
-  targetWord: "knaps",
-  // targetWordLetterDuplicates: checkDuplicateLetters(targetWord.toLowerCase().split("")),
+  targetWord: await getRandomWord(),
 };
 
 async function getRandomWord() {
@@ -34,36 +32,6 @@ async function getRandomWord() {
   return data[0].word;
   // return data[0];
 }
-
-// function checkDuplicateLetters(wordLetters) {
-//   const guessMap = new Map();
-//   for (letter of wordLetters) {
-//     if (!guessMap.has(letter)) {
-//       guessMap.set(letter,1);
-//     } else {
-//       guessMap.set(letter, guessMap.get(letter)++);
-//     }
-//   }
-//   return guessMap;
-// }
-
-// export async function checkGuess(guess) {
-//   const isValid = await isValidWord(guess.toLowerCase());
-//   if (!isValid) return;
-//   const targetLetters = gameState.targetWord.toLowerCase().split("");
-//   const guessLetters = guess.toLowerCase().split("");
-
-//   // TODO: Make checks for misplaced more complex.
-//   return guessLetters.map((letter, index) => {
-//     if (letter === targetLetters[index]) {
-//       return "correct";
-//     } else if (targetLetters.includes(letter)) {
-//       return "misplaced";
-//     } else {
-//       return "incorrect";
-//     }
-//   });
-// }
 
 export async function checkGuess(guess) {
   const isValid = await isValidWord(guess.toLowerCase());
