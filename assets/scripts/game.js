@@ -7,11 +7,13 @@ export const gameState = {
   currentAttempt: 0,
   currentPosition: 0,
   targetWord: await getRandomWord(),
+  previousGuess: "",
 };
 
 export async function resetGameState() {
   gameState.currentAttempt = 0;
   gameState.currentPosition = 0;
+  gameState.previousGuess = "";
   gameState.targetWord = await getRandomWord();
 }
 
@@ -42,11 +44,9 @@ async function getRandomWord() {
   // return data[0];
 }
 
-let prevGuess = "";
-
 export async function checkGuess(guess) {
-  if (guess === prevGuess) return;
-  prevGuess = guess;
+  if (guess === gameState.previousGuess) return;
+  gameState.previousGuess = guess;
 
   const isValid = await isValidWord(guess.toLowerCase());
   if (!isValid) return;

@@ -97,7 +97,13 @@ const handleKeyDown = (e) => {
   }
 };
 
-document.addEventListener("keydown", handleKeyDown);
+function unlockInput() {
+  document.addEventListener("keydown", handleKeyDown);
+}
+
+function lockInput() {
+  document.removeEventListener("keydown", handleKeyDown);
+}
 
 function addLetter(letter) {
   if (
@@ -213,18 +219,15 @@ function changeLetterColors(cell, resultClass) {
   }
 }
 
-function lockInput() {
-  document.removeEventListener("keydown", handleKeyDown);
-}
-
 function setGame() {
   setUpGrid();
   setUpKeyboard();
+  unlockInput();
 }
 
 export async function resetGame() {
+  lockInput();
   await resetGameState();
-  document.addEventListener("keydown", handleKeyDown);
   setGame();
 }
 
