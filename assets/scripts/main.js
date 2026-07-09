@@ -1,7 +1,5 @@
 import { config, gameState, checkGuess, resetGameState } from "./game.js";
 
-console.log(gameState.targetWord);
-
 const btnResetGame = document.getElementById("button-reset");
 btnResetGame.addEventListener("click", () => {
   resetGame();
@@ -10,14 +8,13 @@ btnResetGame.addEventListener("click", () => {
 const grid = document.getElementById("game-grid");
 const resultsParagraph = document.getElementById("results-message");
 const winMessages = [
-  "yay! you win!",
   "you win!",
   "you win 👍",
-  "winner 👍",
-  "👍",
+  "winner. 👍",
+  "¡uᴉʍ no⅄",
   "you win",
-  "woohoo you win",
-  "you win! However, in real life, there are no winners.",
+  "WINNER",
+  "you win : )",
   "winner winner winner winner winner winner winner winner winner winner winner winner winner winner winner winner winner winner winner winner winner winner winner winner winner winner winner winner winner winner winner winner winner winner winner winner winner winner winner winner winner winner winner winner winner winner winner winner winner winner winner winner winner winner winner winner winner winner winner winner winner winner winner ",
 ];
 
@@ -88,6 +85,7 @@ function isLetter(input) {
 }
 
 const handleKeyDown = (e) => {
+  e.preventDefault();
   if (isLetter(e.key)) {
     addLetter(e.key);
   } else if (e.key === `Backspace`) {
@@ -223,6 +221,7 @@ function setGame() {
   setUpGrid();
   setUpKeyboard();
   unlockInput();
+  console.log(gameState.targetWord);
 }
 
 export async function resetGame() {
