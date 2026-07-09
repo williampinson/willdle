@@ -1,4 +1,10 @@
 - settings
-- microtransactions!!!!!! definitely
+- fix game grid and keyboard overflow
+- check to stop dictionary api call if you try the same non-word without making a different guess
+- local storage
+- daily word
 - win and lose events/banners and things
 - animations
+- presets
+- microtransactions!!!!!! definitely
+- challenges

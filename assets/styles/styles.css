@@ -29,10 +29,19 @@ button {
   touch-action: manipulation;
 }
 
-#button-settings {
-  text-align: right;
+#game-header-button-div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.game-header-button {
+  display: flex;
+  align-items: center;
   background-color: var(--background);
   color: var(--text-color);
+  height: 2em;
 }
 
 #game {
@@ -46,6 +55,7 @@ button {
   gap: 8px;
   justify-content: center;
   margin-top: 1.5em;
+  overflow: auto;
 }
 
 .letter {
@@ -94,6 +104,7 @@ button {
   align-items: center;
   flex-direction: column;
   gap: 6px;
+  overflow: auto;
 }
 
 .key {
@@ -135,4 +146,60 @@ button {
 
 .incorrect-keyboard {
   background-color: var(--incorrect);
+}
+
+.dialog {
+  position: fixed;
+  top: 5em;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+  padding: 2em;
+  background-color: var(--incorrect);
+  border: 4px solid var(--incorrect-border);
+}
+
+.close-button {
+  position: absolute;
+  top: 1em;
+  right: 1em;
+  border: none;
+  background: none;
+  font-size: 1.5em;
+  color: var(--text-color);
+}
+
+#settings-dialog {
+  display: none;
+  flex-direction: column;
+  padding: 1em 2em;
+}
+
+#settings-header {
+  margin-top: 0.6em;
+  margin-bottom: 1em;
+}
+
+#settings-form {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1em;
+}
+
+.slider-group {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.slider-value {
+  text-align: right;
+  width: 1em;
+}
+
+#btn-save-settings {
+  width: fit-content;
+  margin: 1rem auto 0 auto;
 }

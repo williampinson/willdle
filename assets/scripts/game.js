@@ -9,6 +9,12 @@ export const gameState = {
   targetWord: await getRandomWord(),
 };
 
+export async function resetGameState() {
+  gameState.currentAttempt = 0;
+  gameState.currentPosition = 0;
+  gameState.targetWord = await getRandomWord();
+}
+
 async function getRandomWord() {
   let validWord = false;
   let data;
@@ -16,11 +22,13 @@ async function getRandomWord() {
   loadingText.classList.remove("hidden");
   while (!validWord) {
     const response = await fetch(
+      // backup API
       // `https://random-word-api.herokuapp.com/word?length=${config.wordLength}`, // slower
       // `https://random-words-api.kushcreates.com/api?length=${config.wordLength}&words=1`,
       `https://random-words-api.kushcreates.com/api?language=en&length=${config.wordLength}&type=lowercase&words=1`,
     );
     data = await response.json();
+    // backup API
     // validWord = await isValidWord(data[0]);
     // console.log("attempted word: " + data[0] + ". Is a word?: " + validWord);
     validWord = await isValidWord(data[0].word);
@@ -30,10 +38,16 @@ async function getRandomWord() {
   }
   loadingText.classList.add("hidden");
   return data[0].word;
+  // backup API
   // return data[0];
 }
 
+let prevGuess = "";
+
 export async function checkGuess(guess) {
+  if (guess === prevGuess) return;
+  prevGuess = guess;
+
   const isValid = await isValidWord(guess.toLowerCase());
   if (!isValid) return;
 

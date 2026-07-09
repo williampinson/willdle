@@ -1,5 +1,11 @@
-import { config, gameState, checkGuess } from "./game.js";
+import { config, gameState, checkGuess, resetGameState } from "./game.js";
+
 console.log(gameState.targetWord);
+
+const btnResetGame = document.getElementById("button-reset");
+btnResetGame.addEventListener("click", () => {
+  resetGame();
+});
 
 const grid = document.getElementById("game-grid");
 const resultsParagraph = document.getElementById("results-message");
@@ -93,29 +99,6 @@ const handleKeyDown = (e) => {
 
 document.addEventListener("keydown", handleKeyDown);
 
-let settingsClickCount = 0;
-
-document.getElementById("button-settings").addEventListener("click", () => {
-  settingsClickCount++;
-  if (settingsClickCount <= 5) {
-    resultsParagraph.textContent = "sorry, no settings yet";
-  } else if (settingsClickCount <= 10) {
-    resultsParagraph.textContent = "I said no settings yet";
-  } else if (settingsClickCount <= 20) {
-    resultsParagraph.textContent = "did you hear me? NO SETTINGS";
-  } else {
-    resultsParagraph.textContent = "STOP PRESSING THAT BUTTON";
-    setTimeout(() => {
-      resultsParagraph.textContent = "I'm calm. I'm calm.";
-      settingsClickCount = 0;
-    }, 10000);
-    setTimeout(() => {
-      resultsParagraph.textContent = "";
-      settingsClickCount = 0;
-    }, 15000);
-  }
-});
-
 function addLetter(letter) {
   if (
     gameState.currentPosition < config.wordLength &&
@@ -157,7 +140,22 @@ async function submitGuess() {
 
   const results = await checkGuess(userGuess);
   if (!results) {
-    resultsParagraph.textContent += "not a word";
+    if (resultsParagraph.textContent === "") {
+      resultsParagraph.textContent = "not a word";
+      return;
+    }
+    if (resultsParagraph.textContent.includes("STOP IT")) {
+      resultsParagraph.textContent = "STOP IT";
+      return;
+    }
+    if (resultsParagraph.textContent.length < 1000) {
+      resultsParagraph.textContent += " not a word";
+    } else {
+      resultsParagraph.textContent = "STOP IT";
+      setTimeout(() => {
+        resultsParagraph.textContent = "";
+      }, 5000);
+    }
     return;
   }
 
@@ -219,7 +217,17 @@ function lockInput() {
   document.removeEventListener("keydown", handleKeyDown);
 }
 
-(function init() {
+function setGame() {
   setUpGrid();
   setUpKeyboard();
+}
+
+export async function resetGame() {
+  await resetGameState();
+  document.addEventListener("keydown", handleKeyDown);
+  setGame();
+}
+
+(function init() {
+  setGame();
 })();

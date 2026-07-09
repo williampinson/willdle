@@ -13,7 +13,14 @@
   <body>
     <header>
       <h1>WILLDLE</h1>
-      <button id="button-settings">Settings &#9881;</button>
+      <div id="game-header-button-div">
+        <button id="button-reset" class="game-header-button">
+          Reset Game &#8634;
+        </button>
+        <button id="button-settings" class="game-header-button">
+          Settings &#9881;
+        </button>
+      </div>
     </header>
     <main>
       <div id="game">
@@ -27,5 +34,53 @@
       <script type="module" src="./assets/scripts/main.js"></script>
       <script type="module" src="./assets/scripts/settings.js"></script>
     </footer>
+
+    <!-- Settings Dialog -->
+    <div id="settings-dialog" class="dialog">
+      <h3 id="settings-header">Settings</h3>
+      <button id="settings-close" class="close-button">&times;</button>
+      <form id="settings-form">
+        <!-- Word Length -->
+        <label for="slider-word-length" id="lbl-slider-word-length"
+          >Word Length</label
+        >
+        <div id="settings-slider-1" class="slider-group">
+          <input
+            id="slider-word-length"
+            type="range"
+            min="2"
+            max="12"
+            value="5"
+          />
+          <label
+            id="lbl-slider-word-length-value"
+            for="slider-word-length"
+            class="slider-value"
+          ></label>
+        </div>
+
+        <!-- Max Attempts -->
+        <label for="slider-max-attempts" id="lbl-slider-max-attempts"
+          >Number of attempts</label
+        >
+        <div id="settings-slider-2" class="slider-group">
+          <input
+            id="slider-max-attempts"
+            type="range"
+            min="1"
+            max="10"
+            value="6"
+          />
+          <label
+            id="lbl-slider-max-attempts-value"
+            for="slider-word-length"
+            class="slider-value"
+          ></label>
+        </div>
+
+        <button id="btn-save-settings" type="submit">Save Settings</button>
+        <div></div>
+      </form>
+    </div>
   </body>
 </html>
