@@ -35,7 +35,11 @@ async function getRandomWord() {
     // backup API
     // validWord = await isValidWord(data[0]);
     // console.log("attempted word: " + data[0] + ". Is a word?: " + validWord);
-    validWord = await isValidWord(data[0].word);
+    if (data[0].word.includes(" ")) {
+      validWord = false;
+    } else {
+      validWord = await isValidWord(data[0].word);
+    }
     console.log(
       "attempted word: " + data[0].word + ". Is a word?: " + validWord,
     );
