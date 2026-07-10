@@ -6,6 +6,8 @@ const dialogSettings = document.getElementById("settings-dialog");
 const btnCloseSettings = document.getElementById("settings-close");
 const formSettings = document.getElementById("settings-form");
 
+const btnDefault = document.getElementById("btn-settings-default");
+
 const sliderWordLength = document.getElementById("slider-word-length");
 const sliderMaxAttempts = document.getElementById("slider-max-attempts");
 
@@ -46,6 +48,13 @@ formSettings.addEventListener("submit", (e) => {
   resetGame();
   dialogSettings.style.display = "none";
   console.log("settings saved!");
+});
+
+btnDefault.addEventListener("click", () => {
+  setSliderValue(sliderWordLength, 5);
+  setSliderLabelValue(sliderWordLength);
+  setSliderValue(sliderMaxAttempts, 6);
+  setSliderLabelValue(sliderMaxAttempts);
 });
 
 function setSliderLabelValue(slider) {

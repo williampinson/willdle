@@ -1,5 +1,4 @@
 PLANNED FEATURES
-- settings
 - fix game grid and keyboard overflow
 - check to stop dictionary api call if you try the same non-word without making a different guess
 - local storage
@@ -9,3 +8,10 @@ PLANNED FEATURES
 - presets
 - microtransactions!!!!!! definitely
 - challenges
+
+POSSIBLE FEATURES
+- orange letters
+    - appear if it's a yellow letter that is confirmed to have no other duplicates
+    - settings option to turn on, off by default
+- numbers on keys to show how many of 1 letter is confirmed to be in the word
+- hard mode - no colors on keys

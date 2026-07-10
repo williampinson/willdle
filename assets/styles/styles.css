@@ -199,7 +199,15 @@ button {
   width: 1em;
 }
 
-#btn-save-settings {
-  width: fit-content;
-  margin: 1rem auto 0 auto;
+#settings-button-container {
+  display: flex;
+  gap: 6px;
+  margin: 0 auto 1rem auto;
 }
+
+/* #btn-save-settings {} */
+
+/* .settings-button {
+  width: fit-content;
+  height: fit-content;
+} */
