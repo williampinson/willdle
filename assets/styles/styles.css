@@ -29,6 +29,10 @@ button {
   touch-action: manipulation;
 }
 
+.text-right {
+  text-align: right;
+}
+
 #game-header-button-div {
   display: flex;
   align-items: center;
@@ -157,8 +161,9 @@ button {
   justify-content: center;
   align-items: center;
   padding: 2em;
-  background-color: var(--incorrect);
-  border: 4px solid var(--incorrect-border);
+  background-color: var(--incorrect-border);
+  border: 4px solid var(--incorrect);
+  min-width: 5em;
 }
 
 .close-button {
@@ -171,15 +176,40 @@ button {
   color: var(--text-color);
 }
 
-#settings-dialog {
+.dialog-header {
+  margin-top: 0.6em;
+  margin-bottom: 1em;
+}
+
+#stats-dialog {
   display: none;
   flex-direction: column;
   padding: 1em 2em;
 }
 
-#settings-header {
-  margin-top: 0.6em;
-  margin-bottom: 1em;
+#stats-table {
+  border: 4px solid var(--incorrect);
+  width: 20vw;
+  border-collapse: collapse;
+}
+
+#stats-table tr {
+  margin: 1em;
+  /* background-color: red; */
+}
+
+#stats-table tr:nth-child(even) {
+  background-color: var(--incorrect);
+}
+
+#stats-table td {
+  padding: 10px;
+}
+
+#settings-dialog {
+  display: none;
+  flex-direction: column;
+  padding: 1em 2em;
 }
 
 #settings-form {

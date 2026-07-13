@@ -1,9 +1,17 @@
-import { config, gameState, checkGuess, resetGameState } from "./game.js";
+import {
+  config,
+  gameState,
+  checkGuess,
+  resetGameState,
+  stats,
+  updateConfig,
+  initStats,
+  setTargetWord,
+} from "./game.js";
+import { getConfig, setStats } from "./storage.js";
 
+//#region Variables
 const btnResetGame = document.getElementById("button-reset");
-btnResetGame.addEventListener("click", () => {
-  resetGame();
-});
 
 const grid = document.getElementById("game-grid");
 const resultsParagraph = document.getElementById("results-message");
@@ -18,9 +26,16 @@ const winMessages = [
   "winner winner winner winner winner winner winner winner winner winner winner winner winner winner winner winner winner winner winner winner winner winner winner winner winner winner winner winner winner winner winner winner winner winner winner winner winner winner winner winner winner winner winner winner winner winner winner winner winner winner winner winner winner winner winner winner winner winner winner winner winner winner winner ",
 ];
 
-function getWinMessage() {
-  return winMessages[Math.floor(Math.random() * winMessages.length)];
-}
+const keyboard = document.getElementById("keyboard");
+const keyboardKeys = [
+  ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p"],
+  ["a", "s", "d", "f", "g", "h", "j", "k", "l"],
+  ["enter", "z", "x", "c", "v", "b", "n", "m", "backspace"],
+];
+
+//#endregion
+
+//#region Setup
 
 function addTileToGrid(row, col) {
   const tile = document.createElement("div");
@@ -39,13 +54,6 @@ function setUpGrid() {
     }
   }
 }
-
-const keyboard = document.getElementById("keyboard");
-const keyboardKeys = [
-  ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p"],
-  ["a", "s", "d", "f", "g", "h", "j", "k", "l"],
-  ["enter", "z", "x", "c", "v", "b", "n", "m", "backspace"],
-];
 
 function setUpKeyboard() {
   keyboard.innerHTML = "";
@@ -80,11 +88,11 @@ function setUpKeyboard() {
   }
 }
 
-function isLetter(input) {
-  return input.length === 1 && /[a-z]/i.test(input);
-}
+//#endregion
 
-const handleKeyDown = (e) => {
+//#region Input
+
+function handleKeyDown(e) {
   e.preventDefault();
   if (isLetter(e.key)) {
     addLetter(e.key);
@@ -93,7 +101,11 @@ const handleKeyDown = (e) => {
   } else if (e.key === "Enter") {
     submitGuess();
   }
-};
+}
+
+function isLetter(input) {
+  return input.length === 1 && /[a-z]/i.test(input);
+}
 
 function unlockInput() {
   document.addEventListener("keydown", handleKeyDown);
@@ -168,24 +180,87 @@ async function submitGuess() {
 
   const isWon = results.every((result) => result === "correct");
   if (isWon) {
-    lockInput();
-    setTimeout(() => {
-      resultsParagraph.textContent = getWinMessage();
-    }, config.wordLength * tileRevealDelay);
+    onGameEnd(true);
     return;
   }
 
   const isLoss = gameState.currentAttempt >= config.maxAttempts - 1;
   if (isLoss) {
-    lockInput();
-    setTimeout(() => {
-      resultsParagraph.textContent = `you lose! LOSER. The word was ${gameState.targetWord}`;
-    }, config.wordLength * tileRevealDelay);
+    onGameEnd(false);
     return;
   }
 
   gameState.currentAttempt++;
   gameState.currentPosition = 0;
+}
+
+//#endregion
+
+//#region Stats
+const btnStats = document.getElementById("button-stats");
+const btnStatsClose = document.getElementById("stats-close");
+const statsDialog = document.getElementById("stats-dialog");
+const statsTable = document.getElementById("stats-table");
+
+btnStats.addEventListener("click", () => {
+  statsDialog.style.display = "flex";
+});
+
+btnStatsClose.addEventListener("click", () => {
+  statsDialog.style.display = "none";
+});
+
+function initStatsView() {
+  statsTable.innerHTML = "";
+  for (let stat in stats) {
+    // Variables
+    const newRow = document.createElement("tr");
+    const key = document.createElement("td");
+    const value = document.createElement("td");
+
+    // Key
+    key.textContent = stat;
+
+    // Value
+    value.classList = "text-right";
+    value.id = `stat-${stat.toLowerCase().replaceAll(" ", "-")}`;
+    if (stat === "Win Percent") {
+      value.textContent = stats[stat] + "%";
+    } else {
+      value.textContent = stats[stat];
+    }
+
+    // Add to Stats Table
+    newRow.append(key, value);
+    statsTable.append(newRow);
+  }
+}
+
+function updateStats(isWin) {
+  stats["Games Played"]++;
+  if (isWin) stats["Games Won"]++;
+  stats["Win Percent"] = Math.floor(
+    (stats["Games Played"] / stats["Games Won"]) * 100,
+  );
+  if (isWin) {
+    stats["Win Streak"]++;
+    stats["Best Streak"] = stats["Win Streak"];
+  } else {
+    stats["Win Streak"] = 0;
+  }
+  setStats();
+}
+
+//#endregion
+
+//#region Game Logic
+
+function getWinMessage() {
+  return winMessages[Math.floor(Math.random() * winMessages.length)];
+}
+
+function getLossMessage() {
+  return `you lose! LOSER. The word was ${gameState.targetWord}`;
 }
 
 function revealAttemptResults(results) {
@@ -217,7 +292,23 @@ function changeLetterColors(cell, resultClass) {
   }
 }
 
+//#endregion
+
+//#region Game States
+
+function onGameEnd(isWin) {
+  lockInput();
+  setTimeout(() => {
+    resultsParagraph.textContent = getWinMessage();
+  }, config.wordLength * tileRevealDelay);
+  updateStats(isWin);
+  initStats();
+}
+
 function setGame() {
+  updateConfig();
+  setTargetWord();
+  initStatsView();
   setUpGrid();
   setUpKeyboard();
   unlockInput();
@@ -230,6 +321,11 @@ export async function resetGame() {
   setGame();
 }
 
+//#endregion
+
 (function init() {
   setGame();
+  btnResetGame.addEventListener("click", () => {
+    resetGame();
+  });
 })();

@@ -1,7 +1,7 @@
 PLANNED FEATURES
 - fix game grid and keyboard overflow
-- check to stop dictionary api call if you try the same non-word without making a different guess
-- local storage
+- stats menu
+- share button
 - daily word
 - win and lose events/banners and things
 - animations
@@ -15,3 +15,5 @@ POSSIBLE FEATURES
     - settings option to turn on, off by default
 - numbers on keys to show how many of 1 letter is confirmed to be in the word
 - hard mode - no colors on keys
+- timer
+    - stats- best time

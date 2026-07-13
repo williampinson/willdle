@@ -1,5 +1,6 @@
 import { config } from "./game.js";
 import { resetGame } from "./main.js";
+import { setConfig } from "./storage.js";
 
 const btnSettings = document.getElementById("button-settings");
 const dialogSettings = document.getElementById("settings-dialog");
@@ -45,6 +46,7 @@ formSettings.addEventListener("submit", (e) => {
   e.preventDefault();
   config.wordLength = +sliderWordLength.value;
   config.maxAttempts = +sliderMaxAttempts.value;
+  setConfig();
   resetGame();
   dialogSettings.style.display = "none";
   console.log("settings saved!");

@@ -16,10 +16,13 @@
       <h1>WILLDLE</h1>
       <div id="game-header-button-div">
         <button id="button-reset" class="game-header-button">
-          Reset Game &#8634;
+          &#8634; Reset
+        </button>
+        <button id="button-stats" class="game-header-button">
+          &#9776; Stats
         </button>
         <button id="button-settings" class="game-header-button">
-          Settings &#9881;
+          &#9881; Settings
         </button>
       </div>
     </header>
@@ -31,14 +34,18 @@
         <div id="keyboard"></div>
       </div>
     </main>
-    <footer>
-      <script type="module" src="./assets/scripts/main.js"></script>
-      <script type="module" src="./assets/scripts/settings.js"></script>
-    </footer>
 
-    <!-- Settings Dialog -->
+    <!-- #region Stats Dialog -->
+    <div id="stats-dialog" class="dialog">
+      <h3 id="stats-header" class="dialog-header">Stats</h3>
+      <button id="stats-close" class="close-button">&times;</button>
+      <table id="stats-table"></table>
+    </div>
+    <!-- #endregion -->
+
+    <!-- #region Settings Dialog -->
     <div id="settings-dialog" class="dialog">
-      <h3 id="settings-header">Settings</h3>
+      <h3 id="settings-header" class="dialog-header">Settings</h3>
       <button id="settings-close" class="close-button">&times;</button>
       <form id="settings-form">
         <!-- Word Length -->
@@ -49,7 +56,7 @@
           <input
             id="slider-word-length"
             type="range"
-            min="2"
+            min="3"
             max="12"
             value="5"
           />
@@ -94,5 +101,11 @@
         <div></div>
       </form>
     </div>
+    <!-- #endregion -->
+
+    <footer>
+      <script type="module" src="./assets/scripts/main.js"></script>
+      <script type="module" src="./assets/scripts/settings.js"></script>
+    </footer>
   </body>
 </html>

@@ -1,3 +1,5 @@
+import { getConfig, getStats } from "./storage.js";
+
 export const config = {
   wordLength: 5,
   maxAttempts: 6,
@@ -6,16 +8,48 @@ export const config = {
 export const gameState = {
   currentAttempt: 0,
   currentPosition: 0,
-  targetWord: await getRandomWord(),
+  targetWord: "",
   previousValidGuess: "",
   previousInvalidGuess: "",
 };
+
+export const stats = {
+  "Games Played": 0,
+  "Games Won": 0,
+  "Win Percent": 0,
+  "Win Streak": 0,
+  "Best Streak": 0,
+  // "Letters Typed": 0,
+  // "Avg Winning Guess": 0,
+};
+
+export function updateConfig() {
+  const storedConfig = getConfig();
+  if (storedConfig) {
+    for (let setting in storedConfig) {
+      config[setting] = storedConfig[setting];
+    }
+  }
+}
+
+export function initStats() {
+  const storedStats = getStats();
+  if (storedStats) {
+    for (let stat in storedStats) {
+      stats[stat] = storedStats[stat];
+    }
+  }
+}
 
 export async function resetGameState() {
   gameState.currentAttempt = 0;
   gameState.currentPosition = 0;
   gameState.previousInvalidGuess = "";
   gameState.previousValidGuess = "";
+  gameState.targetWord = await getRandomWord();
+}
+
+export async function setTargetWord() {
   gameState.targetWord = await getRandomWord();
 }
 
