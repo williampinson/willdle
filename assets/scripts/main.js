@@ -5,7 +5,7 @@ import {
   resetGameState,
   stats,
   updateConfig,
-  initStats,
+  updateStats,
   setTargetWord,
 } from "./game.js";
 import { getConfig, setStats } from "./storage.js";
@@ -211,6 +211,7 @@ btnStatsClose.addEventListener("click", () => {
 });
 
 function initStatsView() {
+  updateStats();
   statsTable.innerHTML = "";
   for (let stat in stats) {
     // Variables
@@ -236,11 +237,11 @@ function initStatsView() {
   }
 }
 
-function updateStats(isWin) {
+function setNewStats(isWin) {
   stats["Games Played"]++;
   if (isWin) stats["Games Won"]++;
   stats["Win Percent"] = Math.floor(
-    (stats["Games Played"] / stats["Games Won"]) * 100,
+    (stats["Games Won"] / stats["Games Played"]) * 100,
   );
   if (isWin) {
     stats["Win Streak"]++;
@@ -299,20 +300,20 @@ function changeLetterColors(cell, resultClass) {
 function onGameEnd(isWin) {
   lockInput();
   setTimeout(() => {
-    resultsParagraph.textContent = getWinMessage();
+    resultsParagraph.textContent = isWin ? getWinMessage() : getLossMessage();
   }, config.wordLength * tileRevealDelay);
-  updateStats(isWin);
-  initStats();
+  setNewStats(isWin);
+  updateStats();
+  initStatsView();
+  console.log(stats);
 }
 
 function setGame() {
   updateConfig();
   setTargetWord();
-  initStatsView();
   setUpGrid();
   setUpKeyboard();
   unlockInput();
-  console.log(gameState.targetWord);
 }
 
 export async function resetGame() {
@@ -325,7 +326,9 @@ export async function resetGame() {
 
 (function init() {
   setGame();
+  initStatsView();
   btnResetGame.addEventListener("click", () => {
     resetGame();
   });
+  // console.log(gameState.targetWord);
 })();

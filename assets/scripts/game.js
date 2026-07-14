@@ -32,7 +32,7 @@ export function updateConfig() {
   }
 }
 
-export function initStats() {
+export function updateStats() {
   const storedStats = getStats();
   if (storedStats) {
     for (let stat in storedStats) {
@@ -51,6 +51,7 @@ export async function resetGameState() {
 
 export async function setTargetWord() {
   gameState.targetWord = await getRandomWord();
+  console.log(gameState.targetWord);
 }
 
 async function getRandomWord() {

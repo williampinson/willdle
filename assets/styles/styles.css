@@ -189,13 +189,12 @@ button {
 
 #stats-table {
   border: 4px solid var(--incorrect);
-  width: 20vw;
+  min-width: 20vw;
   border-collapse: collapse;
 }
 
 #stats-table tr {
   margin: 1em;
-  /* background-color: red; */
 }
 
 #stats-table tr:nth-child(even) {
