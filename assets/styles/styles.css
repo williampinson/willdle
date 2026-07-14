@@ -154,7 +154,7 @@ button {
 
 .dialog {
   position: fixed;
-  top: 5em;
+  top: 4.5em;
   left: 50%;
   transform: translateX(-50%);
   z-index: 1000;
@@ -203,6 +203,7 @@ button {
 
 #stats-table td {
   padding: 10px;
+  min-width: 6em;
 }
 
 #settings-dialog {
