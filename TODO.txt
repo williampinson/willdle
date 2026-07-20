@@ -1,5 +1,4 @@
 PLANNED FEATURES
-- fix game grid and keyboard overflow
 - stats menu
 - share button
 - daily word

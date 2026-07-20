@@ -53,13 +53,18 @@ button {
   justify-content: center;
 }
 
+#game-grid-container {
+  overflow-x: auto;
+}
+
 #game-grid {
-  margin: 0 auto;
   display: grid;
+  padding: 0.5em;
   gap: 8px;
   justify-content: center;
   margin-top: 1.5em;
-  overflow: auto;
+  width: max-content;
+  margin-inline: auto;
 }
 
 .letter {
@@ -101,14 +106,18 @@ button {
   display: none;
 }
 
+#keyboard-container {
+  overflow-x: auto;
+}
+
 #keyboard {
-  margin: auto;
-  padding: 1.5em 0;
+  padding: 1.5em 0.2em;
   display: flex;
   align-items: center;
   flex-direction: column;
   gap: 6px;
-  overflow: auto;
+  width: max-content;
+  margin-inline: auto;
 }
 
 .key {
@@ -121,7 +130,7 @@ button {
   border: none;
   font-weight: bold;
   font-size: 14pt;
-  min-width: 2rem;
+  min-width: 1.9rem;
   min-height: 3rem;
   color: var(--text-color);
 }
