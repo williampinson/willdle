@@ -2,13 +2,15 @@
   --background: #131313;
   --text-color: #f4f4f4;
   --border-color: #3b3b3b;
-  --correct: #538d4e;
-  --misplaced: #b59f3b;
-  --incorrect: #3a3a3c;
+  --correct: #4d7c48;
+  --misplaced: #a69547;
+  --incorrect: #3b3b3b;
   --correct-border: #395936;
   --misplaced-border: #7d6e2a;
   --incorrect-border: #2a2a2b;
   --keyboard-key-color: #7b7b7b;
+  /* --super-misplaced: #aa7544;
+  --super-misplaced-border: #775736; */
 }
 
 body {
@@ -53,6 +55,25 @@ button {
   justify-content: center;
 }
 
+#game-message {
+  background-color: var(--incorrect-border);
+  border-bottom: 2px solid var(--incorrect);
+  height: 2.4em;
+  padding: 0.5em;
+  overflow-y: auto;
+}
+
+#results-message {
+  text-align: center;
+  margin: 0;
+  font-weight: bold;
+}
+
+#game-loading {
+  text-align: center;
+  margin: 0;
+}
+
 #game-grid-container {
   overflow-x: auto;
 }
@@ -92,14 +113,6 @@ button {
 .incorrect {
   background: var(--incorrect);
   border: 2px solid var(--incorrect-border);
-}
-
-#results-message {
-  text-align: center;
-}
-
-#game-loading {
-  text-align: center;
 }
 
 .hidden {
@@ -244,9 +257,8 @@ button {
   margin: 0 auto 1rem auto;
 }
 
-/* #btn-save-settings {} */
-
-/* .settings-button {
-  width: fit-content;
-  height: fit-content;
-} */
+.settings-button {
+  display: flex;
+  align-items: center;
+  height: 2em;
+}

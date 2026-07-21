@@ -1,8 +1,6 @@
 PLANNED FEATURES
-- stats menu
 - share button
 - daily word
-- win and lose events/banners and things
 - animations
 - presets
 - microtransactions!!!!!! definitely
@@ -16,3 +14,4 @@ POSSIBLE FEATURES
 - hard mode - no colors on keys
 - timer
     - stats- best time
+- win and lose events/pop up banners and things

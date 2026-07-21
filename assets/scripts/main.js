@@ -164,13 +164,10 @@ async function submitGuess() {
       resultsParagraph.textContent = "STOP IT";
       return;
     }
-    if (resultsParagraph.textContent.length < 1000) {
+    if (resultsParagraph.textContent.length < 480) {
       resultsParagraph.textContent += " not a word";
     } else {
-      resultsParagraph.textContent = "STOP IT";
-      setTimeout(() => {
-        resultsParagraph.textContent = "";
-      }, 5000);
+      resultsParagraph.textContent = "";
     }
     return;
   }
@@ -317,6 +314,7 @@ function setGame() {
 }
 
 export async function resetGame() {
+  resultsParagraph.textContent = "";
   lockInput();
   await resetGameState();
   setGame();

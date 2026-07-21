@@ -20,6 +20,7 @@ export const stats = {
   "Win Streak": 0,
   "Best Streak": 0,
   // "Letters Typed": 0,
+  // "Game Resets": 0,
   // "Avg Winning Guess": 0,
 };
 
