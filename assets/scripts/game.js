@@ -4,7 +4,7 @@ import { getConfig, getStats } from "./storage.js";
 export const config = {
   wordLength: 5,
   maxAttempts: 6,
-  hardWordsMode: true,
+  // hardWordsMode: true,
 };
 
 export const gameState = {

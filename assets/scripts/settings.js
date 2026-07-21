@@ -86,5 +86,5 @@ function init() {
   setSliderLabelValue(sliderWordLength);
   setSliderValue(sliderMaxAttempts, config.maxAttempts);
   setSliderLabelValue(sliderMaxAttempts);
-  checkboxHardWordsMode.checked = config.hardWordsMode;
+  // checkboxHardWordsMode.checked = config.hardWordsMode;
 }
