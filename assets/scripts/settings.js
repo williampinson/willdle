@@ -7,9 +7,9 @@ const dialogSettings = document.getElementById("settings-dialog");
 const btnCloseSettings = document.getElementById("settings-close");
 const formSettings = document.getElementById("settings-form");
 
-const checkboxHardWordsMode = document.getElementById(
-  "checkbox-hard-words-mode",
-);
+// const checkboxHardWordsMode = document.getElementById(
+//   "checkbox-hard-words-mode",
+// );
 
 const btnDefault = document.getElementById("btn-settings-default");
 
@@ -50,7 +50,7 @@ formSettings.addEventListener("submit", (e) => {
   e.preventDefault();
   config.wordLength = +sliderWordLength.value;
   config.maxAttempts = +sliderMaxAttempts.value;
-  config.hardWordsMode = checkboxHardWordsMode.checked;
+  // config.hardWordsMode = checkboxHardWordsMode.checked;
   setConfig();
   resetGame();
   dialogSettings.style.display = "none";
