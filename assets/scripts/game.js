@@ -1,8 +1,10 @@
+import { isWordIncluded } from "../data/words.js";
 import { getConfig, getStats } from "./storage.js";
 
 export const config = {
   wordLength: 5,
   maxAttempts: 6,
+  hardWordsMode: true,
 };
 
 export const gameState = {
@@ -127,6 +129,9 @@ export async function checkGuess(guess) {
 }
 
 async function isValidWord(word) {
+  if (isWordIncluded(word)) {
+    return true;
+  }
   try {
     const response = await fetch(
       `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`,

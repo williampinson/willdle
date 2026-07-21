@@ -213,19 +213,19 @@ button {
   border: 4px solid var(--incorrect);
   min-width: 20vw;
   border-collapse: collapse;
-}
 
-#stats-table tr {
-  margin: 1em;
-}
+  tr {
+    margin: 1em;
+  }
 
-#stats-table tr:nth-child(even) {
-  background-color: var(--incorrect);
-}
+  tr:nth-child(even) {
+    background-color: var(--incorrect);
+  }
 
-#stats-table td {
-  padding: 10px;
-  min-width: 6em;
+  td {
+    padding: 10px;
+    min-width: 6em;
+  }
 }
 
 #settings-dialog {
@@ -238,6 +238,10 @@ button {
   display: flex;
   flex-direction: column;
   row-gap: 1em;
+
+  input[type="range"] {
+    flex: 1 1 auto;
+  }
 }
 
 .slider-group {

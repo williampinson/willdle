@@ -7,6 +7,10 @@ const dialogSettings = document.getElementById("settings-dialog");
 const btnCloseSettings = document.getElementById("settings-close");
 const formSettings = document.getElementById("settings-form");
 
+const checkboxHardWordsMode = document.getElementById(
+  "checkbox-hard-words-mode",
+);
+
 const btnDefault = document.getElementById("btn-settings-default");
 
 const sliderWordLength = document.getElementById("slider-word-length");
@@ -46,6 +50,7 @@ formSettings.addEventListener("submit", (e) => {
   e.preventDefault();
   config.wordLength = +sliderWordLength.value;
   config.maxAttempts = +sliderMaxAttempts.value;
+  config.hardWordsMode = checkboxHardWordsMode.checked;
   setConfig();
   resetGame();
   dialogSettings.style.display = "none";
@@ -81,4 +86,5 @@ function init() {
   setSliderLabelValue(sliderWordLength);
   setSliderValue(sliderMaxAttempts, config.maxAttempts);
   setSliderLabelValue(sliderMaxAttempts);
+  checkboxHardWordsMode.checked = config.hardWordsMode;
 }
