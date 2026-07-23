@@ -1,4 +1,4 @@
-import { isWordIncluded } from "../data/words.js";
+// import { isWordIncluded } from "../data/words.js";
 import { getConfig, getStats } from "./storage.js";
 
 export const config = {
@@ -129,9 +129,9 @@ export async function checkGuess(guess) {
 }
 
 async function isValidWord(word) {
-  if (isWordIncluded(word)) {
-    return true;
-  }
+  // if (isWordIncluded(word)) {
+  //   return true;
+  // }
   try {
     const response = await fetch(
       `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`,

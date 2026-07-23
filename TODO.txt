@@ -1,3 +1,8 @@
+
+
+BUGS
+- grayed out letter even though it should be yellow
+
 PLANNED FEATURES
 - share button
 - daily word

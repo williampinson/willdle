@@ -276,6 +276,7 @@ function changeLetterColors(cell, resultClass) {
   const letter = cell.textContent.toLowerCase();
   const key = document.getElementById(`key-${letter}`);
   if (resultClass === "correct" || key.classList.contains("correct-keyboard")) {
+    // error here?
     key.classList.remove("incorrect-keyboard");
     key.classList.remove("misplaced-keyboard");
     key.classList.add("correct-keyboard");
