@@ -1,7 +1,7 @@
 
 
 BUGS
-- grayed out letter even though it should be yellow
+- validate localstorage before load
 
 PLANNED FEATURES
 - share button

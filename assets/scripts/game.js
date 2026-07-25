@@ -49,7 +49,7 @@ export async function resetGameState() {
   gameState.currentPosition = 0;
   gameState.previousInvalidGuess = "";
   gameState.previousValidGuess = "";
-  gameState.targetWord = await getRandomWord();
+  setTargetWord();
 }
 
 export async function setTargetWord() {

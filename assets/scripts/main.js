@@ -137,6 +137,9 @@ function removeLetter() {
     cell.textContent = "";
   }
 }
+//#endregion
+
+//#region Submission
 
 const tileRevealDelay = 300;
 
@@ -276,13 +279,12 @@ function changeLetterColors(cell, resultClass) {
   const letter = cell.textContent.toLowerCase();
   const key = document.getElementById(`key-${letter}`);
   if (resultClass === "correct" || key.classList.contains("correct-keyboard")) {
-    // error here?
     key.classList.remove("incorrect-keyboard");
     key.classList.remove("misplaced-keyboard");
     key.classList.add("correct-keyboard");
   } else if (
     resultClass === "misplaced" ||
-    key.classList.contains("correct-keyboard")
+    key.classList.contains("misplaced-keyboard")
   ) {
     key.classList.remove("incorrect-keyboard");
     key.classList.add("misplaced-keyboard");
@@ -329,5 +331,4 @@ export async function resetGame() {
   btnResetGame.addEventListener("click", () => {
     resetGame();
   });
-  // console.log(gameState.targetWord);
 })();
