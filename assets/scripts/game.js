@@ -1,10 +1,17 @@
 // import { isWordIncluded } from "../data/words.js";
-import { getConfig, getStats } from "./storage.js";
+import { getConfig, getStats, setConfig } from "./storage.js";
 
 export const config = {
   wordLength: 5,
   maxAttempts: 6,
   // hardWordsMode: true,
+};
+
+export const globalConfig = {
+  minWordLength: 3,
+  maxWordLength: 12,
+  minMaxAttempts: 1,
+  maxMaxAttempts: 15,
 };
 
 export const gameState = {
@@ -28,11 +35,44 @@ export const stats = {
 
 export function updateConfig() {
   const storedConfig = getConfig();
+
+  // const rawStoredConfig = getConfig();
   if (storedConfig) {
+    validateConfig(storedConfig);
     for (let setting in storedConfig) {
       config[setting] = storedConfig[setting];
     }
   }
+  setConfig();
+}
+
+function validateConfig(storedConfig) {
+  // round to integers
+  // const validConfig = {};
+  for (let setting in storedConfig) {
+    // validConfig[setting] = Math.round(setting);
+    storedConfig[setting] = Math.round(storedConfig[setting]);
+  }
+
+  // validate wordLength
+  if (storedConfig.wordLength > globalConfig.maxWordLength) {
+    storedConfig.wordLength = globalConfig.maxWordLength;
+  } else if (storedConfig.wordLength < globalConfig.minWordLength) {
+    storedConfig.wordLength = globalConfig.minWordLength;
+  }
+  // else {
+  //   storedConfig[wordLength] = storedConfig[wordLength];
+  // }
+
+  // validate maxAttempts
+  if (storedConfig.maxAttempts > globalConfig.maxMaxAttempts) {
+    storedConfig.maxAttempts = globalConfig.maxMaxAttempts;
+  } else if (storedConfig.maxAttempts < globalConfig.minMaxAttempts) {
+    storedConfig.maxAttempts = globalConfig.minMaxAttempts;
+  }
+  // else {
+  //   validConfig[maxAttempts] = storedConfig[minWordLength];
+  // }
 }
 
 export function updateStats() {
