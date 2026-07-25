@@ -36,7 +36,6 @@ export const stats = {
 export function updateConfig() {
   const storedConfig = getConfig();
 
-  // const rawStoredConfig = getConfig();
   if (storedConfig) {
     validateConfig(storedConfig);
     for (let setting in storedConfig) {
@@ -48,9 +47,7 @@ export function updateConfig() {
 
 function validateConfig(storedConfig) {
   // round to integers
-  // const validConfig = {};
   for (let setting in storedConfig) {
-    // validConfig[setting] = Math.round(setting);
     storedConfig[setting] = Math.round(storedConfig[setting]);
   }
 
@@ -60,9 +57,6 @@ function validateConfig(storedConfig) {
   } else if (storedConfig.wordLength < globalConfig.minWordLength) {
     storedConfig.wordLength = globalConfig.minWordLength;
   }
-  // else {
-  //   storedConfig[wordLength] = storedConfig[wordLength];
-  // }
 
   // validate maxAttempts
   if (storedConfig.maxAttempts > globalConfig.maxMaxAttempts) {
@@ -70,9 +64,6 @@ function validateConfig(storedConfig) {
   } else if (storedConfig.maxAttempts < globalConfig.minMaxAttempts) {
     storedConfig.maxAttempts = globalConfig.minMaxAttempts;
   }
-  // else {
-  //   validConfig[maxAttempts] = storedConfig[minWordLength];
-  // }
 }
 
 export function updateStats() {

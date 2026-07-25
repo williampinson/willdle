@@ -1,7 +1,7 @@
 
 
 BUGS
-- validate localstorage before load
+
 
 PLANNED FEATURES
 - share button
