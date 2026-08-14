@@ -1,5 +1,7 @@
-export function isWordIncluded(word) {
-  return words[word.length].includes(word);
+export function getRandomWord(numberOfLetters = 5) {
+  return words[numberOfLetters][
+    Math.floor(Math.random() * words[numberOfLetters].length)
+  ];
 }
 
 const words = {

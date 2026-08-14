@@ -1,5 +1,7 @@
 // import { isWordIncluded } from "../data/words.js";
 import { getConfig, getStats, setConfig } from "./storage.js";
+import { getRandomWord } from "../data/words.js";
+import { isWordIncluded } from "../data/dictionary.js";
 
 export const config = {
   wordLength: 5,
@@ -80,7 +82,7 @@ export async function resetGameState() {
   gameState.currentPosition = 0;
   gameState.previousInvalidGuess = "";
   gameState.previousValidGuess = "";
-  setTargetWord();
+  // setTargetWord();
 }
 
 export async function setTargetWord() {
@@ -88,36 +90,36 @@ export async function setTargetWord() {
   console.log(gameState.targetWord);
 }
 
-async function getRandomWord() {
-  let validWord = false;
-  let data;
-  const loadingText = document.getElementById("game-loading");
-  loadingText.classList.remove("hidden");
-  while (!validWord) {
-    const response = await fetch(
-      // backup API
-      // `https://random-word-api.herokuapp.com/word?length=${config.wordLength}`, // slower
-      // `https://random-words-api.kushcreates.com/api?length=${config.wordLength}&words=1`,
-      `https://random-words-api.kushcreates.com/api?language=en&length=${config.wordLength}&type=lowercase&words=1`,
-    );
-    data = await response.json();
-    // backup API
-    // validWord = await isValidWord(data[0]);
-    // console.log("attempted word: " + data[0] + ". Is a word?: " + validWord);
-    if (data[0].word.includes(" ")) {
-      validWord = false;
-    } else {
-      validWord = await isValidWord(data[0].word);
-    }
-    console.log(
-      "attempted word: " + data[0].word + ". Is a word?: " + validWord,
-    );
-  }
-  loadingText.classList.add("hidden");
-  return data[0].word;
-  // backup API
-  // return data[0];
-}
+// async function getRandomWord() {
+//   let validWord = false;
+//   let data;
+//   const loadingText = document.getElementById("game-loading");
+//   loadingText.classList.remove("hidden");
+//   while (!validWord) {
+//     const response = await fetch(
+//       // backup API
+//       // `https://random-word-api.herokuapp.com/word?length=${config.wordLength}`, // slower
+//       // `https://random-words-api.kushcreates.com/api?length=${config.wordLength}&words=1`,
+//       `https://random-words-api.kushcreates.com/api?language=en&length=${config.wordLength}&type=lowercase&words=1`,
+//     );
+//     data = await response.json();
+//     // backup API
+//     // validWord = await isValidWord(data[0]);
+//     // console.log("attempted word: " + data[0] + ". Is a word?: " + validWord);
+//     if (data[0].word.includes(" ")) {
+//       validWord = false;
+//     } else {
+//       validWord = await isValidWord(data[0].word);
+//     }
+//     console.log(
+//       "attempted word: " + data[0].word + ". Is a word?: " + validWord,
+//     );
+//   }
+//   loadingText.classList.add("hidden");
+//   return data[0].word;
+//   // backup API
+//   // return data[0];
+// }
 
 export async function checkGuess(guess) {
   if (guess === gameState.previousInvalidGuess) return;
@@ -160,15 +162,13 @@ export async function checkGuess(guess) {
 }
 
 async function isValidWord(word) {
-  // if (isWordIncluded(word)) {
-  //   return true;
+  // try {
+  //   const response = await fetch(
+  //     `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`,
+  //   );
+  //   return response.ok;
+  // } catch {
+  //   return false;
   // }
-  try {
-    const response = await fetch(
-      `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`,
-    );
-    return response.ok;
-  } catch {
-    return false;
-  }
+  return isWordIncluded(word);
 }
