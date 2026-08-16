@@ -10,8 +10,8 @@ export const config = {
 };
 
 export const globalConfig = {
-  minWordLength: 3,
-  maxWordLength: 12,
+  minWordLength: 2,
+  maxWordLength: 6,
   minMaxAttempts: 1,
   maxMaxAttempts: 15,
 };
@@ -85,8 +85,8 @@ export async function resetGameState() {
   // setTargetWord();
 }
 
-export async function setTargetWord() {
-  gameState.targetWord = await getRandomWord();
+export function setTargetWord() {
+  gameState.targetWord = getRandomWord(config.wordLength);
   console.log(gameState.targetWord);
 }
 
@@ -162,13 +162,5 @@ export async function checkGuess(guess) {
 }
 
 async function isValidWord(word) {
-  // try {
-  //   const response = await fetch(
-  //     `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`,
-  //   );
-  //   return response.ok;
-  // } catch {
-  //   return false;
-  // }
   return isWordIncluded(word);
 }

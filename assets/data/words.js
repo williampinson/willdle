@@ -1,4 +1,4 @@
-export function getRandomWord(numberOfLetters = 5) {
+export function getRandomWord(numberOfLetters) {
   return words[numberOfLetters][
     Math.floor(Math.random() * words[numberOfLetters].length)
   ];
