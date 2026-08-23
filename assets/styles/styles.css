@@ -24,7 +24,7 @@ body {
 header {
   text-align: center;
   border-bottom: 2px solid var(--border-color);
-  padding-bottom: 0.5em;
+  padding-bottom: 1em;
 }
 
 button {
@@ -45,9 +45,13 @@ button {
 .game-header-button {
   display: flex;
   align-items: center;
+  justify-content: center;
   background-color: var(--background);
   color: var(--text-color);
-  height: 2em;
+  font-size: 18px;
+  border-radius: 4px;
+  height: 2.2em;
+  padding-inline: 0.5em;
 }
 
 #game {
@@ -98,6 +102,7 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
+  border-radius: 4px;
 }
 
 .correct {
@@ -182,7 +187,7 @@ button {
   z-index: 1000;
   justify-content: center;
   align-items: center;
-  padding: 2em;
+  padding: 1.5em;
   background-color: var(--incorrect-border);
   border: 4px solid var(--incorrect);
   min-width: 5em;
@@ -213,6 +218,7 @@ button {
   border: 4px solid var(--incorrect);
   min-width: 20vw;
   border-collapse: collapse;
+  margin-bottom: 1em;
 
   tr {
     margin: 1em;
@@ -258,11 +264,17 @@ button {
 #settings-button-container {
   display: flex;
   gap: 6px;
-  margin: 0 auto 1rem auto;
+  margin-inline: auto;
 }
 
 .settings-button {
   display: flex;
   align-items: center;
-  height: 2em;
+  justify-content: center;
+  background-color: var(--background);
+  color: var(--text-color);
+  font-size: 16px;
+  border-radius: 4px;
+  height: 2.5em;
+  padding-inline: 0.8em;
 }
